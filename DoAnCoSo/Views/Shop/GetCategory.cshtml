@@ -1,0 +1,15 @@
+﻿@model IEnumerable<DoAnCoSo.Models.Category>
+
+<div class="category">
+    @foreach (var item in Model)
+    {
+        <li>
+            @*<a href="/Shop/Index/@item.id">@item.name</a>*@
+            @*@Html.ActionLink(item.name, "Index/" + item.id, "Shop")*@
+
+            @Html.ActionLink( item.name,"Index",new {@categoryId = item.id })
+        </li>
+    }
+    </div>
+
+

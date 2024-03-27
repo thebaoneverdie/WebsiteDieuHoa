@@ -1,0 +1,24 @@
+﻿@model DoAnCoSo.Models.Category
+
+@{
+    ViewBag.Title = "DeleteCategory";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
+}
+
+<div style="text-align:center;">
+    @ViewBag.ErroDellCate
+    @ViewBag.ErroDellCate1
+
+</div>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="info_back">
+        <div class="info_submit" style="text-align:center">
+            @Html.ActionLink("Trở về", "ManagerCategory", "Manager")
+        </div>
+    </div>
+}

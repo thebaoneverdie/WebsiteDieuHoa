@@ -1,0 +1,56 @@
+﻿    @model DoAnCoSo.ViewModels.RegisterModel
+@{
+    ViewBag.Title = "DangNhap";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="login">
+
+
+
+    @using (Html.BeginForm("DangNhap", "Account", FormMethod.Post))
+    {
+        <div class="login_form">
+
+
+            @Html.AntiForgeryToken()
+            <p>Đăng nhập</p>
+
+            <div class="login_errorEmail">
+                @Html.ValidationMessageFor(m => m.email)
+            </div>
+            <div class="login_errorPassword">
+                @ViewBag.error1
+            </div>
+            <div class="login_email">
+
+                @Html.TextBoxFor(m => m.email, new { placeholder = "Email" })
+            </div>
+            <div class="login_errorPassword">
+                @Html.ValidationMessageFor(m => m.password)
+            </div>
+            <div class="login_password">
+                @Html.PasswordFor(m => m.password, new { placeholder = "Mật khẩu" })
+            </div>
+            @*<div class="login_check">
+            @Html.CheckBoxFor(m => m.RememberMe)
+            @Html.LabelFor(m => m.RememberMe)
+        </div>*@
+
+            <input type="submit" value="Đăng nhập" class="login_submit" />
+            @*<div class="login_register">
+            @Html.ActionLink("Register as a new user", "Register")
+        </div>*@
+
+            @* Enable this once you have account confirmation enabled for password reset functionality
+        <p>
+            @Html.ActionLink("Forgot your password?", "ForgotPassword")
+        </p>*@
+
+            <a href="/Account/DangKy" class="login_Register">Chưa có tài khoản? Đăng ký ngay</a>
+        </div>
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }
+    }
+</div>

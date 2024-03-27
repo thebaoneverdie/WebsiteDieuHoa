@@ -1,0 +1,23 @@
+﻿@model DoAnCoSo.Models.User
+
+@{
+    ViewBag.Title = "DeleteUser";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
+}
+<div style="text-align:center;">
+    @ViewBag.ErroDellUser
+    @ViewBag.ErroDellUser1
+
+</div>
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="info_back">
+            <div class="info_submit" style="text-align:center">
+                @Html.ActionLink("Trở về", "ManagerUser", "Manager")
+            </div>
+        </div>
+    }

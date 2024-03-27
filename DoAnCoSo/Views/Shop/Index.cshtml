@@ -1,0 +1,62 @@
+﻿@model PagedList.IPagedList<DoAnCoSo.Models.Product>
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+    
+
+
+<div class="shop_category">
+    <h1>Danh mục</h1>   
+        @Html.Action("GetCategory", "Shop")
+</div>
+
+<div class="shop_product">
+    <div class="sort_product">
+        <p>Sắp xếp:</p>
+        <div class="price_sort">
+            <p>Theo giá tiền</p>
+            <div class="sort_droplist">
+                @Html.ActionLink("Giá tăng dần", "Index", new { sortOrder = ViewBag.PriceAsc, currentFilter = ViewBag.CurrentFilter })
+                @Html.ActionLink("Giá giảm dần", "Index", new { sortOrder = ViewBag.PriceDes, currentFilter = ViewBag.CurrentFilter })
+            </div>
+        </div>
+    </div>
+    
+
+
+    @foreach (var item in Model)
+    {
+        <a href="/Shop/ChiTiet/@item.id">
+            <div class="product">
+
+                <div class="image_product">
+                    <img style="align-self: center; width: 100%; height: 185px" alt="@item.title"
+                         src="~/Content/images/@item.thumbnail" />
+                </div>
+
+                <div class="info_product">
+                    <div class="ten_product">
+                        <p>@item.title</p>
+                    </div>
+                    
+                    <div class="gia_product" id="formatted-currency">
+
+                        <p><strong>Giá tiền: </strong>@item.FormattedAmount</p>
+                    </div>
+
+                </div>
+
+            </div>
+        </a>
+
+    }
+
+
+
+</div>
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

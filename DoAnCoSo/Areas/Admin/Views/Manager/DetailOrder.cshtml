@@ -1,0 +1,89 @@
+﻿@model IEnumerable<DoAnCoSo.Models.Order_Details>
+
+@{
+    ViewBag.Title = "DetailOrder";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
+}
+
+
+<table class="table">
+
+    
+    <tr class="">
+        <th>
+            <p>Mã sản phẩm</p>
+
+        </th>
+        <th>
+            <p>Mã Đơn</p>
+
+        </th>
+        <th>
+            <p>Tên Người Đặt</p>
+
+        </th>
+
+        <th>
+            @*@Html.DisplayNameFor(model => model.Product.title)*@
+            <p>Tên Sản Phẩm</p>
+        </th>
+
+        <th>
+            @*@Html.DisplayNameFor(model => model.price)*@
+            <p>Giá</p>
+        </th>
+
+        <th>
+            @*@Html.DisplayNameFor(model => model.num)*@
+            <p>Số Lượng</p>
+        </th>
+
+        <th>
+            @*@Html.DisplayNameFor(model => model.total_money)*@
+            <p>Tổng Tiền</p>
+        </th>
+    </tr>
+
+
+
+
+    @foreach (var item in Model)
+    {
+
+        <tr class="detailOrder_info">
+            <td>
+                @Html.DisplayFor(modelItem => item.id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.order_id)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Orders.fullname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.title)
+
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.price)
+
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.num)
+
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.total_money)
+
+            </td>
+
+        </tr>
+
+
+    }
+
+</table>

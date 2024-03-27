@@ -1,0 +1,38 @@
+﻿@model DoAnCoSo.Models.Product
+
+@{
+    ViewBag.Title = "ChiTiet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="detail">
+    <div class="image_detail">
+        <img style="align-self: center; width: 100%; height: 500px;" alt="@Model.title"
+             src="~/Content/images/@Model.thumbnail" />
+
+    </div>
+
+    <div class="info_detail">
+        <div class="name_detail">
+            <p>Tên sản phẩm: @Model.title</p>
+        </div>
+
+        <div class="description_detail">
+            <p>Mô tả: @Model.description</p>
+        </div>
+
+        <div class="price_detail">
+            <p>Giá tiền: @Model.price VND</p>
+        </div>
+
+        <div class="order_product">
+            @*<a href="/ShoppingCart/">Đặt hàng</a>*@
+            @Html.ActionLink("Đặt hàng", "AddToCart", "ShoppingCart", new
+                                   {
+                                       id = Model.id
+                                   }, "")
+        </div>
+     
+    </div>
+</div>
+
+

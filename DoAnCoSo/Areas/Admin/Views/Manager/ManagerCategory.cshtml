@@ -1,0 +1,70 @@
+﻿@model PagedList.IPagedList<DoAnCoSo.Models.Category>
+@using PagedList.Mvc
+@*@model IEnumerable<DoAnCoSo.Models.Category>*@
+@{
+    ViewBag.Title = "ManagerCategory";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("ManagerCategory", "Manager", FormMethod.Get))
+{
+    @Html.TextBox("searchString")
+    <input type="submit" value="Search" placeholder="Search" class="search" />
+
+    @*<div class="input-group">
+            <div class="input-group-prepend bg-transparent">
+                <i class="input-group-text border-0 mdi mdi-magnify"></i>
+            </div>
+            <input type="text" class="form-control bg-transparent border-0" placeholder="Tìm kiếm sản phẩm">
+        </div>*@
+    <div class="header_managerproduct">
+        <div class="create_product">
+            @Html.ActionLink("Thêm", "CreateCategory")
+        </div>
+        <div class="admin_sort_product">
+            <p>Sắp xếp:</p>
+            <div class="admin_price_sort">
+                <p>Theo tên</p>
+                <div class="admin_sort_droplist">
+                    @Html.ActionLink("Xếp a-z", "ManagerCategory", new { sortname = ViewBag.AdminnameAsc, currentFilter = ViewBag.CurrentFilter })
+                    @Html.ActionLink("Xếp z-a", "ManagerCategory", new { sortname = ViewBag.AdminnameDes, currentFilter = ViewBag.CurrentFilter })
+
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+<table class="table">
+    <tr>
+        <th>
+            <p>Mã danh mục</p>
+        </th>
+        <th>
+            <p>Tên sản phẩm</p>
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.id
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <td>
+                <div class="edit_product">
+                    <a href="/Admin/Manager/EditCategory/@item.id">Sửa</a>
+                </div>
+                <div class="del_product">
+                    <a href="/Admin/Manager/DeleteCategory/@item.id">Xoá</a>
+                </div>
+            </td>
+        </tr>
+    }
+
+</table>
+@Html.PagedListPager(Model, page => Url.Action("ManagerCategory", new { page, currentFilter = ViewBag.CurrentFilter }))

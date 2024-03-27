@@ -1,0 +1,89 @@
+﻿@*@model IEnumerable<DoAnCoSo.Models.User>*@
+
+
+@model PagedList.IPagedList<DoAnCoSo.Models.User>
+@using PagedList.Mvc
+
+@{
+    ViewBag.Title = "ManagerUser";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
+}
+@ViewBag.ErroDellUser
+@ViewBag.ErroDellUser1
+@using (Html.BeginForm("ManagerUser", "Manager", FormMethod.Get))
+{
+    @Html.TextBox("searchString")
+    <input type="submit" value="Search" placeholder="Search" class="search" />
+
+    @*<div class="input-group">
+            <div class="input-group-prepend bg-transparent">
+                <i class="input-group-text border-0 mdi mdi-magnify"></i>
+            </div>
+            <input type="text" class="form-control bg-transparent border-0" placeholder="Tìm kiếm sản phẩm">
+        </div>*@
+    <div class="header_managerproduct">
+        <div class="create_product">
+            @Html.ActionLink("Thêm", "CreateUser")
+        </div>
+        <div class="admin_sort_product">
+            <p>Sắp xếp:</p>
+            <div class="admin_price_sort">
+                <p>Theo tên</p>
+                <div class="admin_sort_droplist">
+                    @Html.ActionLink("Xếp a-z", "ManagerUser", new { sortUser = ViewBag.AdminUserAsc, currentFilter = ViewBag.CurrentFilter })
+                    @Html.ActionLink("Xếp z-a", "ManagerUser", new { sortUser = ViewBag.AdminUserDes, currentFilter = ViewBag.CurrentFilter })
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            Chức vụ
+        </th>
+        <th>
+            Tên
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Số điện thoại
+        </th>
+
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Role.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fullname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.phone_number)
+            </td>
+
+            <td>
+
+                <div class="edit_product">
+                    <a href="/Admin/Manager/EditUser/@item.id">Sửa</a>
+                </div>
+                <div class="del_product">
+                    <a href="/Admin/Manager/DeleteUser/@item.id">Xoá</a>
+                </div>
+            </td>
+        </tr>
+    }
+
+</table>
+@Html.PagedListPager(Model, page => Url.Action("ManagerUser", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

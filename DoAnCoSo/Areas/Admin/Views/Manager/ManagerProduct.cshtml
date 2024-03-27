@@ -1,0 +1,98 @@
+﻿@*@model IEnumerable<DoAnCoSo.Models.Product>*@
+
+
+@model PagedList.IPagedList<DoAnCoSo.Models.Product>
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "ManagerProduct";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
+}
+
+
+
+@using (Html.BeginForm("ManagerProduct", "Manager", FormMethod.Get))
+{
+    @Html.TextBox("searchString")
+    <input type="submit" value="Search" placeholder="Search" class="search" />
+
+    @*<div class="input-group">
+            <div class="input-group-prepend bg-transparent">
+                <i class="input-group-text border-0 mdi mdi-magnify"></i>
+            </div>
+            <input type="text" class="form-control bg-transparent border-0" placeholder="Tìm kiếm sản phẩm">
+        </div>*@
+    <div class="header_managerproduct">
+        <div class="create_product">
+            @Html.ActionLink("Thêm", "CreateProduct")
+        </div>
+        <div class="admin_sort_product">
+            <p>Sắp xếp:</p>
+            <div class="admin_price_sort">
+                <p>Theo giá tiền</p>
+                <div class="admin_sort_droplist">
+                    @Html.ActionLink("Giá tăng dần", "ManagerProduct", new { sortOrder = ViewBag.AdminPriceAsc, currentFilter = ViewBag.CurrentFilter })
+                    @Html.ActionLink("Giá giảm dần", "ManagerProduct", new { sortOrder = ViewBag.AdminPriceDes, currentFilter = ViewBag.CurrentFilter })
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+<table class="table">
+    <tr>
+        <th>
+            <p>Tên sản phẩm</p>
+        </th>
+        <th>
+            <p>Loại sản phẩm</p>
+        </th>
+        <th>
+            <p>Giá tiền</p>
+        </th>
+        <th>
+            <p>Hình ảnh</p>
+        </th>
+        <th>
+            <p>Mô tả</p>
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.title)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.thumbnail)
+            </td>
+            <td style="width: 300px; overflow: hidden; text-overflow: ellipsis; line-height: 20px; -webkit-line-clamp: 3; height: 60px; display: -webkit-box; -webkit-box-orient: vertical;">
+                @Html.DisplayFor(modelItem => item.description)
+            </td>
+
+            <td>
+                <div class="edit_product">
+                    <a href="/Admin/Manager/EditProduct/@item.id">Sửa</a>
+                </div>
+                <div class="del_product">
+                    <a href="/Admin/Manager/DeleteProduct/@item.id">Xoá</a>
+                </div>
+
+                @*@Html.ActionLink("Sửa", "EditProduct", new { id = item.id }) |
+                    @Html.ActionLink("Chi tiết", "Detail", new { id = item.id }) |
+                    @Html.ActionLink("Xoá", "DeleteProduct", new { id = item.id })*@
+            </td>
+        </tr>
+    }
+
+</table>
+@Html.PagedListPager(Model, page => Url.Action("ManagerProduct", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

@@ -1,0 +1,52 @@
+﻿@model DoAnCoSo.Models.Orders
+@{
+    ViewBag.Title = "CheckOrder";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+<div class="checkOrder_form">
+    <h1 style="text-align:center;">Kiểm tra đơn hàng</h1>
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.id)
+
+    <div class="checkOrder_paid" style="font-size:22px">
+        <p style="font-size:25px">Phương thức thanh toán</p>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.isPaid)
+        </div>
+    </div>
+
+    <div class="checkOrder_complete" style="font-size: 22px; ">
+        <p style="font-size:25px">Trạng thái</p>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.isComplete)
+        </div>
+    </div>
+
+    <div class="checkOrder_totalmoney" style="font-size: 22px; ">
+        <p style="font-size:25px">Tổng tiền</p>
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.total_money, new { @readonly = "readonly" })
+        </div>
+    </div>
+
+    <div class="info_check">
+
+        <div class="back_to_list">
+            @Html.ActionLink("Trở về", "ManagerOrder")
+        </div>
+
+        <div class="info_submit">
+            <input type="submit" value="Lưu" class="checkOrder_submit" />
+        </div>
+    </div>
+</div>
+
+
+}

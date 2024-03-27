@@ -1,0 +1,94 @@
+﻿@model IEnumerable<DoAnCoSo.Models.Orders>
+
+@{
+    ViewBag.Title = "CheckOrder_User";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>CheckOrder_User</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.User.fullname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User1.fullname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fullname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.phone_number)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.note)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.order_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.isPaid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.isComplete)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.total_money)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.fullname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User1.fullname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fullname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.phone_number)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.note)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.order_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.isPaid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.isComplete)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.total_money)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>
